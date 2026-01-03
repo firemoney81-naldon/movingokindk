@@ -1,23 +1,593 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Home</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <!--
-      Need a visual blank slate?
-      Remove all code in `styles.css`!
-    -->
-    <link rel="stylesheet" href="styles.css" />
-    <script type="module" src="script.js"></script>
-  </head>
-  <body>
+
+    <!-- JSON-LD Structured Data for Service -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "serviceType": "전주 이삿짐센터 포장이사 서비스",
+      "provider": {
+        "@type": "Organization",
+        "name": "전주 이삿짐 전문 업체",
+        "url": "https://yourdomain.com",
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "telephone": "+82-10-1234-5678",
+          "contactType": "customer service"
+        }
+      },
+      "areaServed": {
+        "@type": "Place",
+        "name": "전주시",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "전주시"
+        }
+      },
+      "description": "2026년 최신 전주 지역 포장이사, 반포장이사, 원룸이사, 사무실이사 전문 서비스. 합리적인 비용과 전문 인력으로 안전하고 신속한 이사를 보장합니다.",
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "전주 이사 서비스 가격",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Product",
+              "name": "전주 포장이사"
+            },
+            "description": "전담팀이 짐 포장부터 정리까지 모두 진행하는 프리미엄 서비스"
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Product",
+              "name": "전주 반포장이사"
+            },
+            "description": "포장만 업체가 진행하고 정리는 고객이 하는 합리적인 서비스"
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Product",
+              "name": "전주 원룸/용달이사"
+            },
+            "description": "소량 짐이나 1인가구를 위한 맞춤형 이사 서비스"
+          }
+        ]
+      }
+    }
+    </script>
+
+    <!-- Google Fonts for better Korean font display -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+
+    <style>
+        /* CSS Reset and Global Styles */
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            background-color: #f8fcfb; /* Soft, light background */
+            color: #333;
+        }
+        main {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Header and Navigation */
+        header {
+            background-color: #e6f7ff; /* Soft blue header background */
+            padding: 2rem 1rem;
+            text-align: center;
+            border-bottom: 2px solid #b3e0ff;
+        }
+        header h1 {
+            color: #004d99; /* Deep blue heading color */
+            margin-bottom: 0.5rem;
+            font-weight: 900;
+            font-size: 2.5rem;
+        }
+        header p {
+            font-size: 1.1rem;
+            color: #555;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+        nav a {
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            padding: 0.5rem 0;
+            position: relative;
+        }
+        nav a:hover {
+            color: #004d99;
+        }
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: #0066cc;
+            transition: width 0.3s ease-in-out;
+        }
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Section Styling */
+        section {
+            padding: 2rem;
+            border-bottom: 1px dashed #eee;
+        }
+        h2 {
+            font-size: 2rem;
+            color: #004d99;
+            margin-top: 0;
+            border-left: 5px solid #00aaff;
+            padding-left: 1rem;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+        }
+        h3 {
+            font-size: 1.5rem;
+            color: #0066cc;
+            margin-top: 2rem;
+            font-weight: 600;
+        }
+
+        /* Keyword Tags */
+        .keyword-tags {
+            margin: 1.5rem 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .keyword-tags a {
+            background-color: #f0f8ff; /* Lightest blue background */
+            color: #0066cc;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+            border: 1px solid #cceeff;
+        }
+        .keyword-tags a:hover {
+            background-color: #cceeff; /* Slightly darker on hover */
+        }
+
+        /* Table Styling */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 2rem;
+        }
+        th, td {
+            padding: 1rem;
+            border: 1px solid #e0e0e0;
+            text-align: left;
+        }
+        th {
+            background-color: #f0f8ff;
+            color: #004d99;
+            font-weight: 700;
+        }
+        tbody tr:nth-child(even) {
+            background-color: #fafafa;
+        }
+
+        /* Call to Action Button */
+        .cta-button {
+            display: block; /* Make it take full width for visibility */
+            background-color: #ff8c00; /* Warm orange color */
+            color: white;
+            font-weight: 700;
+            padding: 1.2rem 2.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            margin: 1rem 0;
+            text-align: center;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 10px rgba(255, 140, 0, 0.3);
+            transition: background-color 0.3s ease, transform 0.2s;
+        }
+        .cta-button:hover {
+            background-color: #e67e00;
+            transform: translateY(-2px);
+        }
+
+        /* FAQ Accordion */
+        dl dt {
+            font-weight: 700;
+            margin-top: 1rem;
+            padding: 1rem;
+            background-color: #f9f9f9;
+            color: #0066cc;
+            border-radius: 4px;
+            cursor: pointer;
+            border-left: 4px solid #00aaff;
+            transition: background-color 0.3s ease;
+        }
+        dl dt:hover {
+            background-color: #f0f8ff;
+        }
+        dl dd {
+            margin-left: 0;
+            padding: 1rem;
+            background-color: #ffffff;
+            border: 1px solid #eee;
+            border-top: none;
+            border-radius: 0 0 4px 4px;
+            display: none;
+        }
+        dl dt.active + dd {
+            display: block;
+        }
+
+        /* Form Styling */
+        form {
+            background-color: #f9f9f9;
+            padding: 2rem;
+            border-radius: 8px;
+            border: 1px solid #eee;
+        }
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #333;
+        }
+        .form-group input[type="text"],
+        .form-group input[type="tel"],
+        .form-group input[type="email"],
+        .form-group select,
+        .form-group textarea {
+            width: calc(100% - 20px);
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+        .form-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .form-options input[type="radio"], .form-options input[type="checkbox"] {
+            margin-right: 0.5rem;
+        }
+
+        /* Review Section */
+        .reviews-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .review-card {
+            background-color: #fff;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+        .review-card blockquote {
+            margin: 0;
+            font-style: italic;
+            color: #555;
+            position: relative;
+        }
+        .review-card cite {
+            display: block;
+            margin-top: 1rem;
+            text-align: right;
+            font-weight: 500;
+            color: #0066cc;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            font-size: 0.9rem;
+            color: #777;
+            background-color: #f0f0f0;
+            margin-top: 2rem;
+            border-top: 1px solid #ddd;
+        }
+        .external-links {
+            margin-top: 1rem;
+            font-size: 0.85rem;
+            color: #888;
+        }
+        .external-links a {
+            color: #0066cc;
+            text-decoration: none;
+            margin: 0 0.5rem;
+        }
+
+    </style>
+</head>
+<body>
+
+  <header>
+    <h1>전주이삿짐 - 2026년 최신 포장이사 비용 견적 안내</h1>
+    <p>전주 지역 완산구, 덕진구 전문 이사짐센터 | 합리적인 가격과 차별화된 이사 서비스</p>
     <nav>
-      <a href="/" aria-current="page">Home</a>
-      <a href="/page2.html">Other page</a>
+      <ul>
+        <li><a href="#service-intro">서비스 소개</a></li>
+        <li><a href="#price-guide">이사 비용 안내</a></li>
+        <li><a href="#area-specialization">지역별 서비스</a></li>
+        <li><a href="#faq">자주 묻는 질문</a></li>
+        <li><a href="#reservation">견적 문의</a></li>
+      </ul>
     </nav>
-    <main>
-      <h1>Home page</h1>
-    </main>
-  </body>
-</html>
+  </header>
+
+  <main>
+    <section id="service-intro">
+      <h2>전주 이삿짐센터 서비스 소개</h2>
+      <p>전주 지역 이사를 계획하고 계신가요? 저희 전주 이삿짐센터는 2026년 최신 이사 트렌드에 맞춰 고객 맞춤형 서비스를 제공합니다. <span style="font-weight: bold;">전주 포장이사</span>, <span style="font-weight: bold;">전주 반포장이사</span>, <span style="font-weight: bold;">전주 원룸이사</span>, 그리고 <span style="font-weight: bold;">전주 사무실이사</span>까지, 고객님의 다양한 요구에 부응하는 전문적인 솔루션을 보유하고 있습니다. 단순히 짐을 옮기는 것을 넘어, 고객님의 새로운 시작을 안전하고 편안하게 만들어 드리는 것을 최우선 목표로 합니다.</p>
+      <p>이사 서비스는 전문 인력의 숙련도와 장비의 안정성이 핵심입니다. 저희는 철저한 교육을 받은 전문 인력을 배치하여 가구, 가전제품 파손을 최소화하고, 최첨단 장비를 활용해 신속한 작업을 보장합니다. 특히, 고층 아파트 이사에 필요한 사다리차는 안전점검을 완료한 장비만을 사용하며, 이사 당일 예상치 못한 문제 발생 시 즉시 대처할 수 있는 체계적인 시스템을 갖추고 있습니다.</p>
+
+      <h3>포장이사 서비스: A부터 Z까지, 완벽한 이사 솔루션</h3>
+      <p>포장이사는 이사 과정의 모든 부분을 전담팀이 처리하는 서비스입니다. 고객님은 최소한의 짐 정리만으로 이사를 완료할 수 있습니다. <span style="font-weight: bold;">전주 포장이사</span> 서비스는 다음과 같은 세부 항목을 포함합니다:</p>
+      <ul>
+          <li><strong>꼼꼼한 포장:</strong> 의류, 주방용품, 가전제품 등 모든 짐을 종류별, 품목별로 분류하여 전용 포장재(박스, 에어캡 등)를 사용하여 안전하게 포장합니다. 특히 귀중품이나 파손 우려가 있는 물품은 이중 포장을 통해 철저하게 보호합니다.</li>
+          <li><strong>운반 및 운송:</strong> 숙련된 팀원들이 사다리차, 리프트 등 전문 장비를 이용하여 안전하게 짐을 운반합니다. 전주 완산구, 덕진구의 좁은 골목길이나 아파트 단지 진입 시에도 숙련된 운전 기술로 신속하게 운송합니다.</li>
+          <li><strong>정리 및 배치:</strong> 도착지에서 고객님의 요구에 맞춰 짐을 정리하고 가구를 배치합니다. 냉장고, 세탁기 등 가전제품 설치를 돕고, 옷장 내 의류 정리, 주방 용품 정리까지 포함됩니다.</li>
+          <li><strong>청소 서비스:</strong> 이사 후 남은 잔해물 처리와 간단한 마무리 청소(바닥 청소, 쓰레기 수거)를 통해 쾌적한 입주를 돕습니다.</li>
+      </ul>
+
+      <h3>반포장이사 및 원룸이사: 합리적인 선택</h3>
+      <p><span style="font-weight: bold;">전주 반포장이사</span>는 비용 절감을 원하는 고객님께 적합합니다. 포장 작업은 저희 팀이 진행하고, 도착지에서 짐 정리는 고객님께서 직접 하시는 방식입니다. 포장 시간이 단축되어 전체적인 이사 비용을 절감할 수 있으며, <span style="font-weight: bold;">전주 원룸이사</span>나 짐이 많지 않은 소형 가구에 특히 인기가 높습니다. 원룸이나 1.5룸 이사 시에는 전용 용달차량과 1~2명의 인력을 배치하여 효율적인 이사를 진행합니다.</p>
+
+      <div class="keyword-tags" aria-label="연관 키워드">
+        <a href="#area-specialization">전주이삿짐센터 추천</a>
+        <a href="#price-guide">전주 포장이사 비용</a>
+        <a href="#faq">이사견적 비교</a>
+        <a href="#price-guide">전주 용달이사 가격</a>
+        <a href="#service-intro">전주 반포장이사 전문</a>
+        <a href="#area-specialization">전주 완산구 이사</a>
+        <a href="#area-specialization">전주 덕진구 이사</a>
+        <a href="#reservation">이사 업체 선정 팁</a>
+      </div>
+    </section>
+
+    <section id="price-guide">
+      <h2>전주 이사 비용 안내 및 견적 산출 요소 (2026년 기준)</h2>
+      <p>전주 지역의 이사 비용은 단순히 '평당 가격'으로 정해지지 않습니다. 여러 가지 요인이 복합적으로 작용하며, 2026년 현재 시장 상황과 인건비 변동에 따라 유동적입니다. 저희는 투명한 견적 산출을 원칙으로 하며, 고객님께서 이해하기 쉽도록 주요 비용 결정 요소를 안내해 드립니다.</p>
+
+      <h3>이사 비용을 결정하는 주요 요인 분석</h3>
+      <p><strong>1. 이사 종류 및 짐의 양:</strong> 포장이사, 반포장이사, 일반이사 등 서비스 종류에 따라 비용이 달라집니다. 포장이사는 인력 투입이 많아 비용이 가장 높습니다. 짐의 양(부피)은 투입되는 인력과 차량 크기를 결정하므로, 이사 견적 시 가장 중요한 요소 중 하나입니다.</p>
+      <p><strong>2. 이동 거리 및 층수:</strong> 전주 완산구에서 덕진구로 이동하는 것과 같이 동일한 전주 내 이동이라도, 이동 거리가 길어지면 유류비와 인건비가 추가됩니다. 또한, 짐을 내리고 올리는 층수가 높을수록(특히 사다리차 이용이 필수인 경우) 비용이 상승합니다.</p>
+      <p><strong>3. 작업 조건 및 환경:</strong> 이사 당일 엘리베이터 사용 가능 여부, 주차 환경, 좁은 골목길 여부 등이 작업 난이도에 영향을 미칩니다. 좁은 공간으로 인해 사다리차 사용이 어려운 경우, 인력으로 운반해야 하므로 추가 비용이 발생할 수 있습니다. <a href="https://www.e-move.kr" target="_blank">이사짐센터 협회 가이드라인</a>에 따르면, 작업 조건이 어려운 경우 추가 협의를 통해 비용이 산정됩니다.</p>
+      <p><strong>4. 추가 서비스:</strong> 에어컨 설치, 벽걸이 TV 설치, 붙박이장 분해/조립, 피아노 운반, 짐 보관이사 등은 기본 이사 비용 외에 추가 요금이 발생합니다. <span style="font-weight: bold;">전주 보관이사</span>의 경우, 보관 기간 동안의 보관료가 별도로 책정됩니다.</p>
+
+      <h3>전주 이사 서비스 견적 비교표 (2026년 기준)</h3>
+      <p>아래 표는 일반적인 가정 이사를 기준으로 한 견적 참고 자료이며, 실제 견적은 방문 상담을 통해 확정됩니다. <span style="font-weight: bold;">전주 포장이사 비용</span>은 짐의 양(평수)과 투입 인력에 따라 크게 달라집니다.</p>
+      <table>
+        <thead>
+          <tr>
+            <th>구분</th>
+            <th>서비스 내용</th>
+            <th>예상 가격대 (4인 가족 기준)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>포장이사</td>
+            <td>포장, 운반, 정리, 청소 모두 포함</td>
+            <td>130만원 ~ 200만원 이상</td>
+          </tr>
+          <tr>
+            <td>반포장이사</td>
+            <td>포장 및 운반 (정리는 고객 담당)</td>
+            <td>90만원 ~ 140만원</td>
+          </tr>
+          <tr>
+            <td>원룸이사/용달이사</td>
+            <td>소형 짐 운반 및 최소 인력 (짐량에 따라 변동)</td>
+            <td>20만원 ~ 50만원 (기본 기준)</td>
+          </tr>
+        </tbody>
+      </table>
+      <a href="#reservation" class="cta-button">무료 방문 견적 신청하기</a>
+
+      <h3>전주 지역별 이사 비용 산출 시 고려 사항 (2026년)</h3>
+      <p>전주는 신도심과 구도심이 혼재되어 있어 지역별 특성을 고려해야 합니다. 특히 <span style="font-weight: bold;">전주 혁신도시</span>나 <span style="font-weight: bold;">전주 에코시티</span>와 같은 신축 아파트 단지는 이사 수요가 많고, 엘리베이터 사용 예약이 필수적이므로 사전 확인이 중요합니다. 반면, <span style="font-weight: bold;">전주 구도심</span> 지역(예: <span style="font-weight: bold;">전주 서신동</span> 일부, <span style="font-weight: bold;">전주 중앙동</span>)은 좁은 진입로로 인해 사다리차 설치가 어려울 수 있어 인력 운반 비용이 추가될 수 있습니다. 2026년 기준으로, 이사 성수기(3월, 5월, 가을)에는 인건비가 상승하므로 미리 예약하는 것이 유리합니다.</p>
+    </section>
+
+    <section id="area-specialization">
+      <h2>전주 지역별 맞춤형 이삿짐 서비스 - 완벽한 전주이사 솔루션</h2>
+      <p>전주시는 크게 완산구와 덕진구로 나뉘며, 각 지역마다 주거 형태와 이사 환경이 다릅니다. 저희 전주이삿짐센터는 각 구역별 특성을 완벽히 파악하고 맞춤형 이사 솔루션을 제공합니다.</p>
+
+      <h3>완산구 이사 서비스 (효자동, 평화동, 삼천동, 서신동, 중화산동)</h3>
+      <p><strong>전주 완산구</strong>는 인구가 밀집되어 있는 주거지역입니다. 특히 <span style="font-weight: bold;">전주 효자동</span>, <span style="font-weight: bold;">전주 평화동</span>은 아파트 단지와 주택가가 혼재되어 있어 다양한 이사 경험이 필요합니다. 저희는 <span style="font-weight: bold;">전주 효자동 이사</span> 시 아파트 관리 규정을 철저히 준수하여 이사 소음을 최소화하고, 주택가 <span style="font-weight: bold;">전주 평화동 이사</span> 시에는 짐 운반 경로를 사전에 파악하여 신속하게 진행합니다. <span style="font-weight: bold;">전주 삼천동 이사</span>나 <span style="font-weight: bold;">전주 서신동 이사</span> 지역에서는 이사 수요가 많아 주말 이사 예약이 조기에 마감될 수 있으므로, 최소 2~3주 전 예약을 권장합니다.</p>
+
+      <h3>덕진구 이사 서비스 (송천동, 인후동, 금암동, 혁신도시, 에코시티)</h3>
+      <p><strong>전주 덕진구</strong>는 <span style="font-weight: bold;">전주 혁신도시</span>와 <span style="font-weight: bold;">전주 에코시티</span> 등 신도시 개발로 인해 이사 수요가 급증하고 있는 지역입니다. <span style="font-weight: bold;">전주 송천동 이사</span>나 <span style="font-weight: bold;">전주 인후동 이사</span> 시에는 신축 아파트에 최적화된 포장재와 장비를 사용합니다. 특히 <span style="font-weight: bold;">전주 에코시티 이사</span>는 고층 아파트가 많아 사다리차 작업이 필수적이며, 저희는 최신 사다리차를 보유하여 안전하고 신속한 작업을 보장합니다. 또한 <span style="font-weight: bold;">전주 전북대 이사</span>나 <span style="font-weight: bold;">전주 전주대 이사</span> 등 대학가 인근은 <span style="font-weight: bold;">전주 원룸이사</span> 수요가 많으므로, 맞춤형 짐 운반 서비스를 제공합니다.</p>
+
+      <h3>전주 시외/보관이사 전문</h3>
+      <p>전주에서 타 지역으로, 또는 타 지역에서 전주로 이사하는 경우에도 전문적인 장거리 이사 서비스를 제공합니다. <span style="font-weight: bold;">전주 장거리 이사</span>는 짐 운송 시간이 길어지므로, 포장 상태를 더욱 철저히 관리합니다. 또한, <span style="font-weight: bold;">전주 짐보관 이사</span> 서비스를 통해 집수리, 인테리어 기간 동안 고객님의 짐을 안전하게 보관해 드립니다.</p>
+    </section>
+
+    <section id="faq">
+      <h2>자주 묻는 질문 (FAQ)</h2>
+      <p>고객님들이 전주 이사를 준비하면서 가장 궁금해하는 질문들을 모아 답변해 드립니다. 이사 준비에 도움이 되는 정보와 주의사항을 확인하세요.</p>
+      <dl>
+        <dt tabindex="0" aria-expanded="false">Q1. 전주 포장이사 비용은 어떻게 산출되나요?</dt>
+        <dd>A1. 이사 비용은 짐의 양(부피), 이동 거리, 이사 층수, 작업 환경, 성수기/비수기 여부, 그리고 추가 서비스(에어컨 탈부착, 청소 등)에 따라 종합적으로 산출됩니다. 정확한 견적을 위해서는 전문가가 직접 방문하여 짐을 확인하는 <span style="font-weight: bold;">방문 견적</span>이 필수적입니다. 저희는 <span style="font-weight: bold;">전주 이사 견적</span> 시 투명한 비용 산출을 약속합니다. 방문 견적은 무료로 제공됩니다.</dd>
+
+        <dt tabindex="0" aria-expanded="false">Q2. 이사 업체 선정 시 주의해야 할 점은 무엇인가요?</dt>
+        <dd>A2. <span style="font-weight: bold;">첫째, 관허업체 여부를 확인하세요.</span> 이사업체는 화물자동차 운송 주선사업 허가증을 보유한 관허업체여야 합니다. 허가증이 없는 무허가 업체는 피하는 것이 좋습니다. <span style="font-weight: bold;">둘째, 피해보상 이행보증보험 가입 여부를 확인하세요.</span> 만일의 사태에 대비해 고객의 짐 파손 시 보상을 받을 수 있는 보험에 가입되어 있는지 확인해야 합니다. <span style="font-weight: bold;">셋째, 계약서 작성 시 세부 내용을 확인하세요.</span> 이사 일시, 장소, 견적 금액, 추가 비용 발생 조건, 작업 인력 수, 차량 종류 등이 명확히 기재되어야 합니다. <a href="https://www.e-move.kr/info/complain.asp" target="_blank">이사짐센터 협회</a> 및 <a href="https://www.consumer.go.kr" target="_blank">한국소비자원</a>에서 제공하는 소비자 보호 정보를 참고하여 꼼꼼하게 확인하세요.</dd>
+
+        <dt tabindex="0" aria-expanded="false">Q3. 이사 성수기는 언제이며, 예약은 언제 하는 것이 좋나요?</dt>
+        <dd>A3. 이사 성수기는 보통 봄철(3~5월)과 가을철(9~11월)입니다. 특히 주말이나 '손 없는 날'은 수요가 많아 <span style="font-weight: bold;">전주 이사 비용</span>이 상승하며, 예약이 조기에 마감됩니다. <span style="font-weight: bold;">이사 예약</span>은 최소 2주~1달 전에 하는 것이 좋습니다. 2026년 이사 계획이 있다면 미리 견적을 받고 예약하는 것이 유리합니다. 비수기나 주중 이사는 상대적으로 저렴합니다.</dd>
+
+        <dt tabindex="0" aria-expanded="false">Q4. 이사 전에 고객이 준비해야 할 사항은 무엇인가요?</dt>
+        <dd>A4. <span style="font-weight: bold;">이사 전 준비 체크리스트</span>를 작성하세요. 짐이 줄어들수록 이사 비용이 절감되므로, 미리 불필요한 짐을 정리(버리거나 기부)하는 것이 중요합니다. 귀중품, 현금, 계약 서류 등은 이삿짐에 섞이지 않도록 따로 보관하세요. 이사 당일에는 전입신고, 전출신고, 도시가스 차단/연결 신청 등 행정 절차도 미리 확인해야 합니다. <a href="https://www.gov.kr/main?a=mov_guide" target="_blank">정부24</a>에서 제공하는 이사 가이드라인을 참고하면 도움이 됩니다.</dd>
+
+        <dt tabindex="0" aria-expanded="false">Q5. 짐 보관이사 서비스를 이용할 수 있나요?</dt>
+        <dd>A5. 네, 가능합니다. 전주 지역 <span style="font-weight: bold;">보관이사</span> 서비스는 고객님의 짐을 일정 기간 동안 안전한 보관 창고에 보관해 드리는 서비스입니다. 이사 날짜가 맞지 않거나 인테리어 공사 등으로 인해 임시 보관이 필요할 때 유용합니다. 보관 기간 및 짐의 양에 따라 비용이 책정되며, 보관 창고의 환경(온도, 습도 관리)을 확인하는 것이 중요합니다.</dd>
+      </dl>
+    </section>
+
+    <section id="reviews">
+      <h2>전주 이삿짐센터 고객 만족 후기</h2>
+      <p>실제 고객님들의 생생한 후기입니다. 저희 서비스의 신뢰성을 확인하세요.</p>
+      <div class="reviews-container">
+        <div class="review-card">
+          <blockquote>"전주 혁신도시로 이사하면서 여러 업체 견적을 받았는데, 가장 친절하고 합리적인 가격을 제시해 주셨어요. 포장도 꼼꼼하고 마무리 청소까지 완벽했습니다. 다음에도 꼭 이용할 거예요."</blockquote>
+          <cite>김OO 고객님 (전주 혁신도시, 포장이사)</cite>
+        </div>
+        <div class="review-card">
+          <blockquote>"전주대 근처 원룸이사라 짐이 많지 않아 걱정했는데, 용달이사 전문팀이 와서 빠르고 안전하게 처리해 주셨습니다. 특히 짐 정리가 서툰 저에게 많은 도움을 주셔서 감사했습니다. 전주 원룸이사 찾는 분들께 추천합니다."</blockquote>
+          <cite>박OO 고객님 (전주 덕진구, 원룸이사)</cite>
+        </div>
+        <div class="review-card">
+          <blockquote>"전주 효자동 아파트에서 평화동으로 이사했습니다. 사다리차 작업도 숙련되셨고, 가구 배치도 저희 요청대로 정확하게 해주셨어요. 팀원들 모두 활기차게 일하시는 모습이 인상적이었습니다. 전문성이 느껴지는 이사였습니다."</blockquote>
+          <cite>이OO 고객님 (전주 완산구, 반포장이사)</cite>
+        </div>
+      </div>
+    </section>
+
+    <section id="reservation">
+      <h2>전주 이사 무료 방문 견적 문의</h2>
+      <p>정확한 <span style="font-weight: bold;">전주 이사 비용</span>을 확인하려면 방문 견적이 필수입니다. 아래 양식에 정보를 남겨주시면 담당자가 신속하게 연락드리겠습니다. 방문 견적은 무료로 제공되며, 이사 당일 추가 비용 발생을 최소화하기 위해 상세히 안내해 드립니다.</p>
+
+      <form action="/submit-form" method="post">
+        <div class="form-group">
+          <label for="name">이름 (필수)</label>
+          <input type="text" id="name" name="name" placeholder="고객님의 성함을 입력해주세요." required>
+        </div>
+        <div class="form-group">
+          <label for="phone">연락처 (필수)</label>
+          <input type="tel" id="phone" name="phone" placeholder="예: 010-1234-5678" required>
+        </div>
+        <div class="form-group">
+          <label for="email">이메일 (선택)</label>
+          <input type="email" id="email" name="email" placeholder="email@example.com">
+        </div>
+        <div class="form-group">
+          <label>이사 종류 (필수)</label>
+          <div class="form-options">
+            <input type="radio" id="moving-type1" name="moving_type" value="포장이사" required> <label for="moving-type1">포장이사</label>
+            <input type="radio" id="moving-type2" name="moving_type" value="반포장이사"> <label for="moving-type2">반포장이사</label>
+            <input type="radio" id="moving-type3" name="moving_type" value="원룸/용달이사"> <label for="moving-type3">원룸/용달이사</label>
+            <input type="radio" id="moving-type4" name="moving_type" value="사무실/기업이사"> <label for="moving-type4">사무실/기업이사</label>
+            <input type="radio" id="moving-type5" name="moving_type" value="보관이사"> <label for="moving-type5">보관이사</label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="start-address">출발지 주소 (필수)</label>
+          <input type="text" id="start-address" name="start_address" placeholder="예: 전주 완산구 효자동 **아파트" required>
+        </div>
+        <div class="form-group">
+          <label for="end-address">도착지 주소 (필수)</label>
+          <input type="text" id="end-address" name="end_address" placeholder="예: 전주 덕진구 송천동 **아파트" required>
+        </div>
+        <div class="form-group">
+          <label for="date">이사 희망 날짜</label>
+          <input type="text" id="date" name="date" placeholder="예: 2026년 3월 15일">
+        </div>
+        <div class="form-group">
+          <label for="details">추가 요청사항 (자세히 적어주시면 정확한 견적에 도움이 됩니다.)</label>
+          <textarea id="details" name="details" placeholder="이사 품목, 짐의 양, 사다리차 필요 여부, 에어컨 설치 등 상세 요청사항을 적어주세요."></textarea>
+        </div>
+        <button type="submit" class="cta-button">무료 견적 신청 완료</button>
+      </form>
+    </section>
+
+    <!-- Content for SEO: Detailed Explanation of Moving Processes and Local Keywords (for 20,000 character requirement) -->
+    <section>
+      <h2>심층 분석: 전주 이삿짐 서비스의 전문성과 필요성</h2>
+      <p>전주 지역의 이사 환경은 최근 몇 년간 큰 변화를 겪었습니다. <span style="font-weight: bold;">전주 에코시티</span>와 <span style="font-weight: bold;">전주 혁신도시</span> 등 대규모 신규 아파트 단지 입주가 활발해지면서 고층 이사 수요가 증가했고, 이로 인해 전문적인 사다리차 운용 능력이 더욱 중요해졌습니다. 또한 <span style="font-weight: bold;">전주 서신동</span>이나 <span style="font-weight: bold;">전주 중화산동</span>과 같은 기존 주거 지역의 재개발 및 리모델링 이사 수요도 꾸준합니다. 이처럼 다양한 환경에 맞춰 이사업체는 단순히 짐을 옮기는 것을 넘어, 고객의 소중한 재산을 안전하게 보호하고 쾌적한 입주를 돕는 전문적인 서비스로 진화하고 있습니다.</p>
+
+      <h3>포장이사 서비스의 세분화: 주방 짐 정리의 중요성</h3>
+      <p>많은 고객님들이 <span style="font-weight: bold;">전주 포장이사</span> 서비스를 선택하는 가장 큰 이유는 주방 짐 정리의 번거로움 때문입니다. 주방에는 깨지기 쉬운 식기류, 부피가 큰 조리 기구, 그리고 냉장고 속 식재료 등 포장과 정리에 손이 많이 가는 품목이 집중되어 있습니다. 저희 <span style="font-weight: bold;">전주이삿짐센터</span>는 주방 전담 인력을 배치하여 식기류는 에어캡으로 꼼꼼하게 개별 포장하고, 냉장고 속 식품은 아이스박스에 담아 신선도를 유지하며 운반합니다. 도착지에서는 고객의 동선에 맞춰 주방 수납장 정리를 지원하여 입주 후 즉시 생활이 가능하도록 돕습니다. <span style="font-weight: bold;">전주 아파트 이사</span>의 경우, 주방 짐 정리의 만족도가 서비스 평가의 핵심 요소로 작용합니다.</p>
+
+      <h3>가구 및 가전제품 운반 노하우 (전주 특화)</h3>
+      <p>가구와 가전제품은 고가 품목이므로 운반 시 파손되지 않도록 특별한 주의가 필요합니다. 특히 <span style="font-weight: bold;">전주 신축 아파트</span>에 많이 설치되는 빌트인 가구나 대형 가전(스타일러, 건조기 등)은 분해와 재조립이 필요할 수 있습니다. 저희는 <span style="font-weight: bold;">전주 이사업체</span> 중에서도 이러한 특수 품목 운반에 대한 숙련된 노하우를 보유하고 있습니다. 가구의 흠집 방지를 위해 전용 커버를 사용하고, 이동 중 충격 흡수를 위해 짐을 단단히 고정합니다. <span style="font-weight: bold;">전주 송천동</span>이나 <span style="font-weight: bold;">전주 평화동</span>의 아파트 단지에서는 이사 당일 엘리베이터 사용 시간이 제한되는 경우가 많으므로, 이사 당일 일정 관리를 철저히 하여 시간 내에 작업을 완료하는 것이 중요합니다.</p>
+
+      <h3>사무실/기업 이사: 전주 지역 비즈니스 환경 고려</h3>
+      <p><span style="font-weight: bold;">전주 사무실이사</span>는 일반 가정 이사와는 다른 전문성이 요구됩니다. 서류, IT 장비, 사무용 가구 등은 단순 운반을 넘어 업무 연속성을 고려한 체계적인 이전 계획이 필요합니다. 저희는 <span style="font-weight: bold;">전주 이사</span> 서비스 외에도 <span style="font-weight: bold;">전주 사무실 이전</span> 전문팀을 운영하고 있습니다. 컴퓨터, 서버 등 민감한 IT 장비는 충격 방지 포장재를 사용하여 안전하게 운반하며, 이전 후 즉시 업무를 시작할 수 있도록 배치 및 설치를 지원합니다. 특히 <span style="font-weight: bold;">전주 혁신도시</span> 내 공공기관 및 기업 이전 시, 보안과 신속성을 최우선으로 하여 서비스를 제공합니다.</p>
+
+      <h3>이사 준비 A to Z: 이사 체크리스트 상세 안내 (2026년 업데이트)</h3>
+      <p>성공적인 이사는 준비에서부터 시작됩니다. 2026년 이사 계획을 위한 상세한 체크리스트를 제공하여 고객님의 이사 과정을 돕습니다.</p>
+      <ul>
+          <li><strong>이사 2주 전:</strong> 이사 업체 선정 및 계약 완료. 아파트 관리사무소에 이사 날짜 통보 및 엘리베이터 사용 예약. 가구 및 가전제품 AS 신청(분해/재조립 필요 시). 우편물 주소 변경 신청. (우체국, 정부24)</li>
+          <li><strong>이사 1주 전:</strong> 짐 정리 시작 (불필요한 물건 정리 및 폐기물 스티커 구매). 은행, 카드사 등 금융기관 주소 변경. 전화, 인터넷, TV 해지/이전 신청.</li>
+          <li><strong>이사 2~3일 전:</strong> 냉장고 내부 정리 및 성에 제거. 세탁기 물 빼기. 이사 당일 사용할 귀중품, 현금, 계약 서류, 세면도구 등을 별도 박스에 보관.</li>
+          <li><strong>이사 당일:</strong> 전기, 수도, 가스 요금 정산 및 차단 확인. 최종 점검 후 이사팀 작업 시작.</li>
+          <li><strong>이사 완료 후:</strong> 전입신고 (주민센터 또는 정부24), 확정일자 받기, 가스/인터넷 연결 확인. 이사팀 작업 완료 후 짐 파손 여부 최종 확인.</li>
+      </ul>
+      <p>이러한 준비 과정을 통해 <span style="font-weight: bold;">전주이삿짐</span> 서비스 이용 만족도를 극대화할 수 있습니다. <a href="https://www.namu.wiki/w/%EC%9D%B4%EC%82%AC" target="_blank">나무위키 이사 항목</a>에서도 이사 준비에 대한 상세한 가이드를 확인할 수 있습니다.</p>
+
+      <h3>고객 맞춤형 사다리차 서비스 (전주 고층 아파트 이사)</h3>
+      <p>사다리차는 고층 이사 시 필수적인 장비입니다. 특히 <span style="font-weight: bold;">전주 에코시티</span>, <span style="font-weight: bold;">전주 혁신도시</span> 등 신축 고층 아파트에서는 사다리차를 이용한 이사가 일반적입니다. 저희 <span style="font-weight: bold;">전주 이삿짐센터</span>는 층수에 따른 다양한 사다리차를 보유하고 있으며, 숙련된 기사가 안전 수칙을 준수하여 운용합니다. 좁은 공간에 적합한 소형 사다리차부터 고층(20층 이상)까지 커버 가능한 대형 사다리차까지 갖추고 있습니다. 사다리차는 이사 비용 견적에 포함되는 경우가 일반적이나, 현장 상황(불법 주정차, 건물 구조)에 따라 사다리차 이용이 불가능한 경우도 발생할 수 있습니다. 이러한 경우를 대비하여 사전에 현장 방문 견적을 진행하여 안전하고 효율적인 이사 방법을 논의합니다.</p>
+
+      <h3>전주 지역 키워드 심층 분석: 이사 관련 자동완성 키워드 및 연관 검색어</h3>
+      <p>전주 지역 고객들이 이사를 검색할 때 주로 사용하는 키워드는 "전주 포장이사 추천", "전주 이사 비용", "전주 원룸이사", "전주 이사업체" 등입니다. 세부적으로는 <span style="font-weight: bold;">전주 완산구 이사</span>, <span style="font-weight: bold;">전주 덕진구 이사</span>, <span style="font-weight: bold;">전주 효자동 이사</span>, <span style="font-weight: bold;">전주 송천동 이사</span>와 같이 지역명을 함께 검색합니다. 이 외에도 '함께 많이 찾는 키워드'로는 "이사 체크리스트", "보관이사 비용", "이사 후 청소", "이사 폐기물 처리" 등이 있습니다. 저희는 이러한 고객의 검색 의도를 파악하여 종합적인 정보를 제공함으로써, 고객 만족도를 높이고 있습니다.</p>
+      <p><strong>전주 이사 관련 키워드 목록:</strong> <span style="font-weight: bold;">전주이삿짐센터</span>, <span style="font-weight: bold;">전주 포장이사</span>, <span style="font-weight: bold;">전주 반포장이사</span>, <span style="font-weight: bold;">전주 원룸이사</span>, <span style="font-weight: bold;">전주 용달이사</span>, <span style="font-weight: bold;">전주 이사비용</span>, <span style="font-weight: bold;">전주 이사업체 추천</span>, <span style="font-weight: bold;">전주 보관이사</span>, <span style="font-weight: bold;">전주 사다리차 비용</span>, <span style="font-weight: bold;">전주 이사견적 비교</span>, <span style="font-weight: bold;">완산구 이사</span>, <span style="font-weight: bold;">덕진구 이사</span>, <span style="font-weight: bold;">전주 혁신도시 이사</span>, <span style="font-weight: bold;">전주 에코시티 이사</span>, <span style="font-weight: bold;">효자동 이사</span>, <span style="font-weight: bold;">송천동 이사</span>, <span style="font-weight: bold;">평화동 이사</span>, <span style="font-weight: bold;">서신동 이사</span>, <span style="font-weight: bold;">중화산동 이사</span>, <span style="font-weight: bold;">삼천동 이사</span>, <span style="font-weight: bold;">인후동 이사</span>, <span style="font-weight: bold;">금암동 이사</span>, <span style="font-weight: bold;">전주 사무실이사</span>, <span style="font-weight: bold;">전주 장거리 이사</span>, <span style="font-weight: bold;">전주 이사 준비</span>.</p>
+      <p>저희는 2026년에도 고객 만족을 최우선으로 하는 <span style="font-weight: bold;">전주 이삿짐센터</span>가 될 것을 약속드리며, 투명하고 전문적인 서비스로 고객님의 새로운 출발을 응원합니다. 이사에 대한 더 자세한 정보는 언제든지 문의해 주시면 친절하게 안내해 드리겠습니다.</p>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>&copy; 2026 전주 이삿짐 전문 업체. All Rights Reserved. | 사업자등록번호: 000-00-00000</p>
+    <div class="external-links">
+        <a href="https://www.e-move.kr" target="_blank">이사짐센터 협회</a> |
+        <a href="https://www.consumer.go.kr" target="_blank">한국소비자원</a> |
+        <a href="https://www.gov.kr/main?a=mov_guide" target="_blank">정부24 이사 가이드</a> |
+        <a href="https://www.namu.wiki/w/%EC%9D%B4%EC%82%AC" target="_blank">나무위키 이사 정보</a> |
+        <a href="https://www.jeonju.go.kr/index.jeonju" target="_blank">전주시청</a>
+    </div>
+  </footer>
+
+  <script>
+    // FAQ 아코디언 기능 (접기/펼치기)
+    document.querySelectorAll('dl dt').forEach((dt) => {
+      dt.addEventListener('click', () => {
+        const expanded = dt.getAttribute('aria-expanded') === 'true';
+        document.querySelectorAll('dl dt').forEach(otherDt => {
+          if (otherDt !== dt) {
+            otherDt.classList.remove('active');
+            otherDt.setAttribute('aria-expanded', 'false');
+          }
+        });
+        dt.classList.toggle('active');
+        dt.setAttribute('aria-expanded', !expanded);
+      });
+      dt.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          dt.click();
+        }
+      });
+    });
+  </script>
+
+  
